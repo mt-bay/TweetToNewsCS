@@ -1,0 +1,1 @@
+C:\src\TweetToNewsCS\TweetToNewsCS\bin\Debug\TweetToNewsCS.exe.config
