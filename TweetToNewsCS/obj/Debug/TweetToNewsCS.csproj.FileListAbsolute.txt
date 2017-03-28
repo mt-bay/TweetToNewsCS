@@ -1,1 +1,9 @@
 C:\src\TweetToNewsCS\TweetToNewsCS\bin\Debug\TweetToNewsCS.exe.config
+C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\TweetToNewsCS.exe.config
+C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\TweetToNewsCS.exe
+C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\TweetToNewsCS.pdb
+C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\LibNMeCab.dll
+C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\Newtonsoft.Json.dll
+C:\src\TweetsToNewsCS\TweetToNewsCS\obj\Debug\TweetToNewsCS.csprojResolveAssemblyReference.cache
+C:\src\TweetsToNewsCS\TweetToNewsCS\obj\Debug\TweetToNewsCS.exe
+C:\src\TweetsToNewsCS\TweetToNewsCS\obj\Debug\TweetToNewsCS.pdb
