@@ -7,3 +7,9 @@ C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\Newtonsoft.Json.dll
 C:\src\TweetsToNewsCS\TweetToNewsCS\obj\Debug\TweetToNewsCS.csprojResolveAssemblyReference.cache
 C:\src\TweetsToNewsCS\TweetToNewsCS\obj\Debug\TweetToNewsCS.exe
 C:\src\TweetsToNewsCS\TweetToNewsCS\obj\Debug\TweetToNewsCS.pdb
+C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\TweetSharp.dll
+C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\Newtonsoft.Json.xml
+C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\TweetSharp.pdb
+C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\Hammock.dll
+C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\Hammock.pdb
+C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\Hammock.ClientProfile.dll
