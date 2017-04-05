@@ -8,10 +8,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 using TweetSharp;
-
-using TweetToNewsCS.Model.Domain;
 using TweetToNewsCS.Model.Infrastructure;
 using System.IO;
+using TweetToNewsCS.Model.Domain;
 
 namespace TweetToNewsCS
 {
@@ -25,23 +24,13 @@ namespace TweetToNewsCS
                 rawJson = reader.ReadToEnd();
             }
 
-            
-            
-                List<TwitterStatus> search = TwitterApi.Search("\"わいわい忍者ランド\"").ToList();
-                Console.WriteLine(@"{0}(@{1})さんの忍者ランド：{2}", search[0].User.Name, search[0].User.ScreenName, search[0].Text);
+            List<TwitterStatus> search = TwitterApi.Search("\"ラドンもそうだそうだと言っています\"").ToList();
+            Console.WriteLine(@"{0}(@{1})さんの忍者ランド：{2}", search[0].User.Name, search[0].User.ScreenName, search[0].Text);
 
-            //IsoDateTimeConverter formatter = new IsoDateTimeConverter { DateTimeFormat = @"ddd MMM dd HH:mm:ss zzz yyyy" };
+            MeCabResult result = MeCab.Parse(search[0].Text);
 
-            //List<Tweet> result = JsonConvert.DeserializeObject<List<Tweet>>(rawJson, formatter);
+            Console.WriteLine(JsonConvert.SerializeObject(result));
 
-            //Console.WriteLine("resultの長さ : {0}", result.Count);
-            //Console.WriteLine("resultのサンプル(時間 : {0}) : {1}", result[0].CreatedAt, result[0]);
-//            }
-//            catch(Exception e)
-//            {
-//                Console.WriteLine(e.Message);
-//            }
-            
             Console.ReadKey();
         }
     }

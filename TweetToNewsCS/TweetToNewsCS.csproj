@@ -64,8 +64,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Domain\Tweet.cs" />
+    <Compile Include="Model\Application\Logic.cs" />
+    <Compile Include="Model\Domain\MeCabResult.cs" />
     <Compile Include="Model\Infrastructure\Api.cs" />
+    <Compile Include="Model\Infrastructure\MeCab.cs" />
+    <Compile Include="Model\Infrastructure\MeCabFilter.cs" />
     <Compile Include="Model\Infrastructure\TwitterApi.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
