@@ -11,15 +11,22 @@ namespace TweetToNewsCS.Model.Infrastructure
 {
     class MeCabFilter
     {
-        public IEnumerable<MeCabResult> filter;
+        private List<MeCabResult> filter;
 
-        public IEnumerable<MeCabResult> GenerateFromFile(string filePath)
+
+        private MeCabFilter(IEnumerable<MeCabResult> filterResults)
+        {
+            filter = filterResults.ToList();
+        }
+
+
+        public static MeCabFilter GenerateFromFile(string filePath)
         {
             try
             {
                 using (StreamReader reader = new StreamReader(filePath))
                 {
-                    return JsonConvert.DeserializeObject<List<MeCabResult>>(reader.ReadToEnd());
+                    return new MeCabFilter(JsonConvert.DeserializeObject< List<MeCabResult> >(reader.ReadToEnd()));
                 }
             }
             catch(Exception e)
@@ -28,5 +35,19 @@ namespace TweetToNewsCS.Model.Infrastructure
             }
         }
 
+
+        public static MeCabFilter GenerateFromJson(string json)
+        {
+            return new MeCabFilter(JsonConvert.DeserializeObject<List<MeCabResult>>(json));
+        }
+
+
+        public bool IsPassable(MeCabResult target)
+        {
+            foreach(MeCabResult f in filter)
+            {
+            }
+            return true;
+        }
     }
 }

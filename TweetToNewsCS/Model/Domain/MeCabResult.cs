@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TweetToNewsCS.Model.Domain
 {
-    class MeCabResult
+    struct MeCabResult
     {
         /// <summary> 表層形 </summary>
         public string 表層形 { get; set; }
@@ -28,21 +28,5 @@ namespace TweetToNewsCS.Model.Domain
         public string 読み { get; set; }
         /// <summary> 発音 </summary>
         public string 発音 { get; set; }
-
-        public override bool Equals(object obj)
-        {
-            if(obj == null || obj as MeCabResult == null)
-            {
-                return false;
-            }
-
-            return Equals(obj as MeCabResult);
-        }
-
-        public bool Equals(MeCabResult obj)
-        {
-            bool returns = false;
-            if()
-        }
     }
 }

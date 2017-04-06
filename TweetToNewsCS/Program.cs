@@ -27,9 +27,11 @@ namespace TweetToNewsCS
             List<TwitterStatus> search = TwitterApi.Search("\"ラドンもそうだそうだと言っています\"").ToList();
             Console.WriteLine(@"{0}(@{1})さんの忍者ランド：{2}", search[0].User.Name, search[0].User.ScreenName, search[0].Text);
 
-            MeCabResult result = MeCab.Parse(search[0].Text);
+            Console.ReadKey();
 
-            Console.WriteLine(JsonConvert.SerializeObject(result));
+            List<MeCabResult> result = MeCab.Parse(search[0].Text).ToList();
+
+            Console.WriteLine(JsonConvert.SerializeObject(result, Formatting.Indented));
 
             Console.ReadKey();
         }
