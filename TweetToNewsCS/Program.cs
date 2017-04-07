@@ -24,14 +24,16 @@ namespace TweetToNewsCS
                 rawJson = reader.ReadToEnd();
             }
 
-            List<TwitterStatus> search = TwitterApi.Search("\"ラドンもそうだそうだと言っています\"").ToList();
+            List<TwitterStatus> search = TwitterApi.Search("\"わいわい忍者ランド\"").ToList();
             Console.WriteLine(@"{0}(@{1})さんの忍者ランド：{2}", search[0].User.Name, search[0].User.ScreenName, search[0].Text);
-
-            Console.ReadKey();
 
             List<MeCabResult> result = MeCab.Parse(search[0].Text).ToList();
 
-            Console.WriteLine(JsonConvert.SerializeObject(result, Formatting.Indented));
+            MeCabFilter filter = MeCabFilter.GenerateFromFile("filter.json");
+
+            List<MeCabResult> filtered = filter.Filtering(result);
+
+            Console.WriteLine(JsonConvert.SerializeObject(filtered, Formatting.Indented));
 
             Console.ReadKey();
         }

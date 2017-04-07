@@ -42,12 +42,18 @@ namespace TweetToNewsCS.Model.Infrastructure
         }
 
 
+        public List<MeCabResult> Filtering(List<MeCabResult> targetResult)
+        {
+            return targetResult.Where(t => IsPassable(t)).ToList();
+        }
+
+
         public bool IsPassable(MeCabResult target)
         {
-            foreach(MeCabResult f in filter)
-            {
-            }
-            return true;
+            return !filter.Where(f => f.品詞 == target.品詞 &&
+                (f.品詞細分類1 == target.品詞細分類1 || f.品詞細分類1 == null) &&
+                (f.品詞細分類2 == target.品詞細分類2 || f.品詞細分類2 == null) &&
+                (f.品詞細分類3 == target.品詞細分類2 || f.品詞細分類3 == null)).Any();
         }
     }
 }
