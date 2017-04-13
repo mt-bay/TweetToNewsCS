@@ -7,11 +7,24 @@ using System.Threading.Tasks;
 using TweetToNewsCS.Model.Domain;
 
 using NMeCab;
+using TweetSharp;
+
 
 namespace TweetToNewsCS.Model.Infrastructure
 {
     static class MeCab
     {
+        public static IEnumerable<MeCabResult> Parse(IEnumerable<TwitterStatus> target)
+        {
+            List<MeCabResult> returns = new List<MeCabResult>();
+            foreach(TwitterStatus s in target)
+            {
+                returns = returns.Concat(Parse(s.Text)).ToList();
+            }
+
+            return returns;
+        }
+
         /// <summary>
         /// 受け取った文字列を形態素解析し、その結果を返す
         /// </summary>
@@ -24,6 +37,29 @@ namespace TweetToNewsCS.Model.Infrastructure
             MeCabNode node = MeCab.Create().ParseToNode(target);
 
             return node.ToMeCabResultEnumerable();
+        }
+
+        public static Dictionary<string, MeCabResultAggregate> Aggregate(IEnumerable<MeCabResult> target)
+        {
+            Dictionary<string, MeCabResultAggregate> returns = new Dictionary<string, MeCabResultAggregate>();
+
+            foreach(MeCabResult m in target)
+            {
+                returns = returns.AddResult(m);
+            }
+
+            return returns;
+        }
+
+
+        private static Dictionary<string, MeCabResultAggregate> AddResult(this Dictionary<string, MeCabResultAggregate> result, MeCabResult add)
+        {
+            MeCabResultAggregate buf = new MeCabResultAggregate();
+            buf.Result       = add;
+            buf.Num          = result.ContainsKey(add.原形) ? result[add.原形].Num + 1 : 1;
+            result[add.原形] = buf;
+
+            return result;
         }
 
 

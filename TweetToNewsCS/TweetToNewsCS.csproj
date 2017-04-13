@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Model\Application\Logic.cs" />
     <Compile Include="Model\Domain\MeCabResult.cs" />
+    <Compile Include="Model\Domain\MeCabResultAggregate.cs" />
     <Compile Include="Model\Domain\Options.cs" />
     <Compile Include="Model\Infrastructure\Api.cs" />
     <Compile Include="Model\Infrastructure\MeCab.cs" />

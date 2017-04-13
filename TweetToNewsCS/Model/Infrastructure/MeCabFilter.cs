@@ -13,6 +13,10 @@ namespace TweetToNewsCS.Model.Infrastructure
     {
         private List<MeCabResult> filter;
 
+        public MeCabFilter()
+        {
+            filter = new List<MeCabResult>();
+        }
 
         private MeCabFilter(IEnumerable<MeCabResult> filterResults)
         {
@@ -33,6 +37,21 @@ namespace TweetToNewsCS.Model.Infrastructure
             {
                 throw e;
             }
+        }
+        
+
+        public void AddFilterFromFile(string filePath)
+        {
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                filter = filter.Concat(JsonConvert.DeserializeObject<List<MeCabResult>>(reader.ReadToEnd())).ToList();
+            }
+        }
+
+
+        public void AddFilterFromJson(string json)
+        {
+            filter = filter.Concat(JsonConvert.DeserializeObject<List<MeCabResult>>(json)).ToList();
         }
 
 

@@ -13,5 +13,6 @@ namespace TweetToNewsCS.Model.Domain
         public string raw { get; set; }
         public string filterfile { get; set; }
         public string filterraw { get; set; }
+        public string output { get; set; }
     }
 }

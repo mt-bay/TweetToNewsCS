@@ -23,22 +23,54 @@ namespace TweetToNewsCS
             //string[] options = new string[] { "-query", "-file", "-raw", "-filter" };
             Options option = OptionAnalysis.Analysis(args);
 
-            string rawJson = "";
-            using (StreamReader reader = new StreamReader(option.file))
+            List<TwitterStatus> data = new List<TwitterStatus>();
+
+            if(option.raw != string.Empty)
             {
-                rawJson = reader.ReadToEnd();
+                using (StreamReader reader = new StreamReader(option.file))
+                {
+                    data = data.Concat((List<TwitterStatus>)JsonConvert.DeserializeObject(reader.ReadToEnd())).ToList();
+                }
             }
 
-            List<TwitterStatus> search = TwitterApi.Search(option.query).ToList();
-            Console.WriteLine(@"{0}(@{1})さんの忍者ランド：{2}", search[0].User.Name, search[0].User.ScreenName, search[0].Text);
+            if(option.query != string.Empty)
+            {
+                data = data.Concat(TwitterApi.Search(option.query)).ToList();
+            }
 
-            List<MeCabResult> result = MeCab.Parse(search[0].Text).ToList();
+            Console.WriteLine("ツイートの数 : {0}", data.Count);
+
+            //Console.WriteLine(@"{0}(@{1})さんの忍者ランド：{2}", data[0].User.Name, data[0].User.ScreenName, data[0].Text);
+
+            List<MeCabResult> parsed = MeCab.Parse(data).ToList();
+            Console.WriteLine("単語の数 : {0}", parsed.Count);
+
+            //List<MeCabResult> result = MeCab.Parse(data[0].Text).ToList();
 
             MeCabFilter filter = MeCabFilter.GenerateFromFile(option.filterfile);
 
-            List<MeCabResult> filtered = filter.Filtering(result);
+            if(option.filterfile != string.Empty)
+            {
+                filter.AddFilterFromFile(option.filterfile);
+            }
+            if(option.filterraw != string.Empty)
+            {
+                filter.AddFilterFromJson(option.filterraw);
+            }
 
-            Console.WriteLine(JsonConvert.SerializeObject(filtered, Formatting.Indented));
+            List<MeCabResult> filtered = filter.Filtering(parsed);
+
+            Dictionary<string, MeCabResultAggregate> aggregate = MeCab.Aggregate(filtered);
+
+            Console.WriteLine(JsonConvert.SerializeObject(aggregate, Formatting.Indented));
+            if (option.output != string.Empty)
+            {
+                using (StreamWriter writer = new StreamWriter(option.output))
+                {
+                    writer.WriteLine(JsonConvert.SerializeObject(aggregate, Formatting.Indented));
+                }
+            }
+
 
             Console.ReadKey();
         }
