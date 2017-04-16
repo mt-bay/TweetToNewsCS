@@ -61,9 +61,9 @@ namespace TweetToNewsCS.Model.Infrastructure
         }
 
 
-        public List<MeCabResult> Filtering(List<MeCabResult> targetResult)
+        public IEnumerable<MeCabResult> Filtering(IEnumerable<MeCabResult> targetResult)
         {
-            return targetResult.Where(t => IsPassable(t)).ToList();
+            return targetResult.Where(t => IsPassable(t));
         }
 
 

@@ -25,6 +25,7 @@ namespace TweetToNewsCS.Model.Infrastructure
             return returns;
         }
 
+
         /// <summary>
         /// 受け取った文字列を形態素解析し、その結果を返す
         /// </summary>
@@ -38,6 +39,7 @@ namespace TweetToNewsCS.Model.Infrastructure
 
             return node.ToMeCabResultEnumerable();
         }
+
 
         public static Dictionary<string, MeCabResultAggregate> Aggregate(IEnumerable<MeCabResult> target)
         {
