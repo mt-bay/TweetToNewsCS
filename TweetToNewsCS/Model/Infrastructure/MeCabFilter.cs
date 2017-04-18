@@ -12,10 +12,12 @@ namespace TweetToNewsCS.Model.Infrastructure
     class MeCabFilter
     {
         private List<MeCabResult> filter;
+        private List<MeCabResult> acceptFilter;
 
         public MeCabFilter()
         {
             filter = new List<MeCabResult>();
+            acceptFilter = new List<MeCabResult>();
         }
 
         private MeCabFilter(IEnumerable<MeCabResult> filterResults)
@@ -48,6 +50,14 @@ namespace TweetToNewsCS.Model.Infrastructure
             }
         }
 
+        public void AddAcceptFilterFromFile(string filePath)
+        {
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                acceptFilter = acceptFilter.Concat(JsonConvert.DeserializeObject<List<MeCabResult>>(reader.ReadToEnd())).ToList();
+            }
+        }
+
 
         public void AddFilterFromJson(string json)
         {
@@ -69,10 +79,14 @@ namespace TweetToNewsCS.Model.Infrastructure
 
         public bool IsPassable(MeCabResult target)
         {
-            return !filter.Where(f => f.品詞 == target.品詞 &&
-                (f.品詞細分類1 == target.品詞細分類1 || f.品詞細分類1 == null) &&
-                (f.品詞細分類2 == target.品詞細分類2 || f.品詞細分類2 == null) &&
-                (f.品詞細分類3 == target.品詞細分類2 || f.品詞細分類3 == null)).Any();
+            return (!acceptFilter.Any() || acceptFilter.Where(f => f.品詞 == target.品詞 &&
+                    (f.品詞細分類1 == target.品詞細分類1 || f.品詞細分類1 == null) &&
+                    (f.品詞細分類2 == target.品詞細分類2 || f.品詞細分類2 == null) &&
+                    (f.品詞細分類3 == target.品詞細分類2 || f.品詞細分類3 == null)).Any()) &&
+                !filter.Where(f => f.品詞 == target.品詞 &&
+                    (f.品詞細分類1 == target.品詞細分類1 || f.品詞細分類1 == null) &&
+                    (f.品詞細分類2 == target.品詞細分類2 || f.品詞細分類2 == null) &&
+                    (f.品詞細分類3 == target.品詞細分類2 || f.品詞細分類3 == null)).Any();
         }
     }
 }

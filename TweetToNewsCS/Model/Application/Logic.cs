@@ -35,7 +35,8 @@ namespace TweetToNewsCS.Model.Application
 
             if (option.query != string.Empty)
             {
-                IEnumerable<TwitterStatus> searchResult = TwitterApi.Search(option.query);
+                IEnumerable<TwitterStatus> searchResult = TwitterApi.Search(option);
+                //IEnumerable<TwitterStatus> searchResult = TwitterApi.Search(option.query);
                 char[] invalidChara = Path.GetInvalidFileNameChars();
                 string queryFileName = option.query + "_" + DateTime.Now.ToString("yyMMdd_HHmm") + ".json";
                 foreach(char c in invalidChara)
@@ -58,6 +59,11 @@ namespace TweetToNewsCS.Model.Application
         {
             MeCabFilter filter = new MeCabFilter();
 
+            if(option.acceptfile != string.Empty)
+            {
+                filter.AddAcceptFilterFromFile(option.acceptfile);
+            }
+
             if (option.filterfile != string.Empty)
             {
                 filter.AddFilterFromFile(option.filterfile);
@@ -68,6 +74,28 @@ namespace TweetToNewsCS.Model.Application
             }
 
             return filter.Filtering(filteringTarget);
+        }
+
+
+        public static IEnumerable< IEnumerable<MeCabResult> > Filtering(this IEnumerable< IEnumerable<MeCabResult> > filteringTarget, Options option)
+        {
+            MeCabFilter filter = new MeCabFilter();
+
+            if (option.acceptfile != string.Empty)
+            {
+                filter.AddAcceptFilterFromFile(option.acceptfile);
+            }
+
+            if (option.filterfile != string.Empty)
+            {
+                filter.AddFilterFromFile(option.filterfile);
+            }
+            if (option.filterraw != string.Empty)
+            {
+                filter.AddFilterFromJson(option.filterraw);
+            }
+
+            return filteringTarget.Select(f => filter.Filtering(f));
         }
 
 

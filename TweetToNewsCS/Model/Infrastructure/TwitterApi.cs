@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TweetToNewsCS.Model.Domain;
 
 using TweetSharp;
 
@@ -17,6 +18,91 @@ namespace TweetToNewsCS.Model.Infrastructure
             //service.AuthenticateWith();            
         }
 
+
+        public static IEnumerable<TwitterStatus> Search(Options option)
+        {
+            DateTime? since, until;
+            double? geoLatitude, geoLongtitude;
+            long? sinceId, maxId;
+            int? radius, count;
+
+            if(string.IsNullOrEmpty(option.since))
+            {
+                since = null;
+            }
+            else
+            {
+                since = DateTime.Parse(option.since);
+            }
+
+            if(string.IsNullOrEmpty(option.until))
+            {
+                until = null;
+            }
+            else
+            {
+                until = DateTime.Parse(option.until);
+            }
+
+            if(string.IsNullOrEmpty(option.latitude))
+            {
+                geoLatitude = null;
+            }
+            else
+            {
+                geoLatitude = double.Parse(option.latitude);
+            }
+
+            if(string.IsNullOrEmpty(option.longtitude))
+            {
+                geoLongtitude = null;
+            }
+            else
+            {
+                geoLongtitude = double.Parse(option.longtitude);
+            }
+
+            if(string.IsNullOrEmpty(option.radius))
+            {
+                radius = null;
+            }
+            else
+            {
+                radius = int.Parse(option.radius);
+            }
+
+            if(string.IsNullOrEmpty(option.sinceid))
+            {
+                sinceId = null;
+            }
+            else
+            {
+                sinceId = long.Parse(option.sinceid);
+            }
+
+            if(string.IsNullOrEmpty(option.maxid))
+            {
+                maxId = null;
+            }
+            else
+            {
+                maxId = long.Parse(option.maxid);
+            }
+
+            if(string.IsNullOrEmpty(option.count))
+            {
+                count = null;
+            }
+            else
+            {
+                count = int.Parse(option.count);
+            }
+
+            return Search(option.query, since, until, option.lang, option.locale, true,
+                          geoLatitude, geoLongtitude, radius,
+                          sinceId, maxId, count);
+        }
+
         public static IEnumerable<TwitterStatus> Search(string query = null, DateTime? since = null, DateTime? until = null, string lang = null, string locale = null, bool includeEntities = true,
                                                         double? geoLatitude = null, double? geoLongtitude = null, int? geoRadius = null,
                                                         long? sinceId = null, long? maxId = null, int? count = null)
@@ -28,15 +114,15 @@ namespace TweetToNewsCS.Model.Infrastructure
                     new TwitterGeoLocationSearch(latitutde: geoLatitude.Value, longitude: geoLongtitude.Value, radius: geoRadius.Value, unitOfMeasurement: TwitterGeoLocationSearch.RadiusType.Km) :
                     null;
 
-                string q = (query == null && since == null && until == null) ? null :
+                string q = (string.IsNullOrEmpty(query) && since == null && until == null) ? null :
                     (query ?? string.Empty) + ((since == null) ? "" : " since:" + since.Value.ToString("yyyy-MM-dd_HH:mm:ss") + "_JST") + ((until == null) ? "" : " until:" + until.Value.ToString("yyyy-MM-dd_HH:mm:ss") + "_JST");
 
                 SearchOptions options = new SearchOptions
                 {
                     //Resulttype = TwitterSearchResultType.Recent,
                     Q = q,
-                    Lang = lang,
-                    Locale = locale,
+                    Lang = string.IsNullOrEmpty(lang) ? null : lang,
+                    Locale = string.IsNullOrEmpty(locale) ? null : locale,
                     //IncludeEntities = includeEntities,
                     Geocode = geo,
                     SinceId = sinceId,

@@ -14,7 +14,7 @@ namespace TweetToNewsCS.Model.Infrastructure
 {
     static class MeCab
     {
-        public static IEnumerable<MeCabResult> Parse(IEnumerable<TwitterStatus> target)
+        public static IEnumerable<MeCabResult> ParseAndConcat(IEnumerable<TwitterStatus> target)
         {
             List<MeCabResult> returns = new List<MeCabResult>();
             foreach(TwitterStatus s in target)
@@ -23,6 +23,12 @@ namespace TweetToNewsCS.Model.Infrastructure
             }
 
             return returns;
+        }
+
+
+        public static IEnumerable< IEnumerable<MeCabResult> > Parse(IEnumerable<TwitterStatus> target)
+        {
+            return target.Select(t => Parse(t.Text));
         }
 
 
@@ -48,6 +54,21 @@ namespace TweetToNewsCS.Model.Infrastructure
             foreach(MeCabResult m in target)
             {
                 returns = returns.AddResult(m);
+            }
+
+            return returns;
+        }
+
+        public static Dictionary<string, MeCabResultAggregate> AggregateAll(IEnumerable< IEnumerable<MeCabResult> > target)
+        {
+            Dictionary<string, MeCabResultAggregate> returns = new Dictionary<string, MeCabResultAggregate>();
+
+            foreach(IEnumerable<MeCabResult> e in target)
+            {
+                foreach(MeCabResult m in e)
+                {
+                    returns = returns.AddResult(m);
+                }
             }
 
             return returns;

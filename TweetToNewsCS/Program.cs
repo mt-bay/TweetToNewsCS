@@ -32,12 +32,12 @@ namespace TweetToNewsCS
 
             //Console.WriteLine(@"{0}(@{1})さんの忍者ランド：{2}", data[0].User.Name, data[0].User.ScreenName, data[0].Text);
 
-            List<MeCabResult> parsed = MeCab.Parse(data).Filtering(option).ToList();
+            List< IEnumerable<MeCabResult> > parsed = MeCab.Parse(data).Filtering(option).ToList();
             Console.WriteLine("単語の数 : {0}", parsed.Count);
 
             //List<MeCabResult> result = MeCab.Parse(data[0].Text).ToList();
 
-            Dictionary<string, MeCabResultAggregate> aggregate = MeCab.Aggregate(parsed);
+            Dictionary<string, MeCabResultAggregate> aggregate = MeCab.AggregateAll(parsed);
 
             Console.WriteLine(JsonConvert.SerializeObject(aggregate, Formatting.Indented));
             if (option.output != string.Empty)
@@ -47,9 +47,6 @@ namespace TweetToNewsCS
                     writer.WriteLine(JsonConvert.SerializeObject(aggregate, Formatting.Indented));
                 }
             }
-
-
-            Console.ReadKey();
         }
     }
 }
