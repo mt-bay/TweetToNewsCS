@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 
 using TweetToNewsCS.Model.Domain;
+using Newtonsoft.Json;
 
 namespace TweetToNewsCS.Model.Infrastructure
 {
@@ -22,12 +23,17 @@ namespace TweetToNewsCS.Model.Infrastructure
             Options returns = new Options();
             Type returnsType = returns.GetType();
 
-            //MemberInfo[] member = returnsType.GetMembers(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
             PropertyInfo[] property = returnsType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             List<string> optionsList = property.Select(hoge => hoge.Name).ToList();
             string[] bufArgs = args.Length % 2 == 0 ? args.ToArray() : args.Concat(new string[] { "" }).ToArray();
-            Dictionary<string, string> input = bufArgs.ToDictionary(e => e.Substring(1).ToLower(), e => bufArgs.SkipWhile(a => a != e).Skip(1).FirstOrDefault());
+
+            Dictionary<string, string> input = new Dictionary<string, string>();
+
+            for (int i = 0; i < bufArgs.Length; i += 2)
+            {
+                input[bufArgs[i].Substring(1).ToLower()] = bufArgs[i + 1];
+            }
 
             foreach(PropertyInfo p in returnsType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {

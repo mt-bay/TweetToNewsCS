@@ -115,7 +115,7 @@ namespace TweetToNewsCS.Model.Infrastructure
                     null;
 
                 string q = (string.IsNullOrEmpty(query) && since == null && until == null) ? null :
-                    (query ?? string.Empty) + ((since == null) ? "" : " since:" + since.Value.ToString("yyyy-MM-dd_HH:mm:ss") + "_JST") + ((until == null) ? "" : " until:" + until.Value.ToString("yyyy-MM-dd_HH:mm:ss") + "_JST");
+                    (query ?? string.Empty) + " -rt" + ((since == null) ? "" : " since:" + since.Value.ToString("yyyy-MM-dd_HH:mm:ss") + "_JST") + ((until == null) ? "" : " until:" + until.Value.ToString("yyyy-MM-dd_HH:mm:ss") + "_JST");
 
                 SearchOptions options = new SearchOptions
                 {
@@ -127,12 +127,32 @@ namespace TweetToNewsCS.Model.Infrastructure
                     Geocode = geo,
                     SinceId = sinceId,
                     MaxId = maxId,
-                    Count = count
+                    Count = count.HasValue ? (count > 100 ? 100 : count) : null
                 };
 
                 TwitterSearchResult result = service.Search(options);
+                if(result == null)
+                {
+                    return new List<TwitterStatus>();
+                }
+                IEnumerable<TwitterStatus> returns = result.Statuses;
+                int last = (count ?? 0) - returns.Count();
 
-                return result.Statuses;
+                if(last > 0 && returns.Any())
+                {
+                    try
+                    {
+                        returns = returns.Concat(Search(query, since, until, lang, locale, includeEntities,
+                                                        geoLatitude, geoLongtitude, geoRadius,
+                                                        sinceId, returns.Last().Id, last));
+                    }
+                    catch(Exception e)
+                    {
+                        Console.WriteLine("Twitter検索の際に例外が発生しました(メッセージ : {0})", e.Message);
+                    }
+                }
+
+                return returns;
             }
             catch(Exception e)
             {

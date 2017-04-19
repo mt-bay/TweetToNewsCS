@@ -14,6 +14,15 @@ namespace TweetToNewsCS.Model.Infrastructure
 {
     static class MeCab
     {
+        private static MeCabTagger tagger;
+
+
+        static MeCab()
+        {
+            tagger = MeCab.Create();
+        }
+
+
         public static IEnumerable<MeCabResult> ParseAndConcat(IEnumerable<TwitterStatus> target)
         {
             List<MeCabResult> returns = new List<MeCabResult>();
@@ -28,7 +37,7 @@ namespace TweetToNewsCS.Model.Infrastructure
 
         public static IEnumerable< IEnumerable<MeCabResult> > Parse(IEnumerable<TwitterStatus> target)
         {
-            return target.Select(t => Parse(t.Text));
+            return target.Select(t => Parse(TextFilter.Filtering(t.Text)));
         }
 
 
@@ -39,15 +48,12 @@ namespace TweetToNewsCS.Model.Infrastructure
         /// <returns>解析結果(List形式)</returns>
         public static IEnumerable<MeCabResult> Parse(string target)
         {
-            MeCabTagger tagger = Create();
-
-            MeCabNode node = MeCab.Create().ParseToNode(target);
-
+            MeCabNode node = tagger.ParseToNode(target);
             return node.ToMeCabResultEnumerable();
         }
 
 
-        public static Dictionary<string, MeCabResultAggregate> Aggregate(IEnumerable<MeCabResult> target)
+        public static List<MeCabResultAggregate> Aggregate(IEnumerable<MeCabResult> target)
         {
             Dictionary<string, MeCabResultAggregate> returns = new Dictionary<string, MeCabResultAggregate>();
 
@@ -56,10 +62,11 @@ namespace TweetToNewsCS.Model.Infrastructure
                 returns = returns.AddResult(m);
             }
 
-            return returns;
+            return returns.Values.ToList();
         }
 
-        public static Dictionary<string, MeCabResultAggregate> AggregateAll(IEnumerable< IEnumerable<MeCabResult> > target)
+
+        public static List<MeCabResultAggregate> AggregateAll(IEnumerable< IEnumerable<MeCabResult> > target)
         {
             Dictionary<string, MeCabResultAggregate> returns = new Dictionary<string, MeCabResultAggregate>();
 
@@ -71,7 +78,7 @@ namespace TweetToNewsCS.Model.Infrastructure
                 }
             }
 
-            return returns;
+            return returns.Values.ToList();
         }
 
 

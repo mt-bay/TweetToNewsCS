@@ -33,23 +33,24 @@ namespace TweetToNewsCS.Model.Application
                 }
             }
 
-            if (option.query != string.Empty)
+            IEnumerable<TwitterStatus> searchResult = TwitterApi.Search(option);
+            char[] invalidChara = Path.GetInvalidFileNameChars();
+            string queryFileName = option.query + "_" + DateTime.Now.ToString("yyMMdd_HHmm") + ".json";
+            foreach(char c in invalidChara)
             {
-                IEnumerable<TwitterStatus> searchResult = TwitterApi.Search(option);
-                //IEnumerable<TwitterStatus> searchResult = TwitterApi.Search(option.query);
-                char[] invalidChara = Path.GetInvalidFileNameChars();
-                string queryFileName = option.query + "_" + DateTime.Now.ToString("yyMMdd_HHmm") + ".json";
-                foreach(char c in invalidChara)
-                {
-                    queryFileName = queryFileName.Replace(c, Strings.StrConv(c.ToString(), VbStrConv.Wide)[0]);
-                }
-
-                using (StreamWriter writer = new StreamWriter(queryFileName))
-                {
-                    writer.WriteLine(JsonConvert.SerializeObject(searchResult, Formatting.Indented));
-                }
-                returns = returns.Concat(searchResult).ToList();
+                queryFileName = queryFileName.Replace(c, Strings.StrConv(c.ToString(), VbStrConv.Wide)[0]);
             }
+
+            if(!Directory.Exists("検索結果/"))
+            {
+                Directory.CreateDirectory("検索結果");
+            }
+
+            using (StreamWriter writer = new StreamWriter("検索結果/" + queryFileName))
+            {
+                writer.WriteLine(JsonConvert.SerializeObject(searchResult, Formatting.Indented));
+            }
+            returns = returns.Concat(searchResult).ToList();
 
             return returns;
         }
