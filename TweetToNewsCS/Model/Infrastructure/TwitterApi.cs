@@ -148,7 +148,7 @@ namespace TweetToNewsCS.Model.Infrastructure
                     }
                     catch(Exception e)
                     {
-                        Console.WriteLine("Twitter検索の際に例外が発生しました(メッセージ : {0})", e.Message);
+                        Console.Error.WriteLine("Twitter検索の際に例外が発生しました(メッセージ : {0})", e.Message);
                     }
                 }
 
