@@ -53,6 +53,20 @@ namespace TfIdfCalc
                 }
             }
 
+            foreach(KeyValuePair<string, Dictionary<string, double> > n in TfIdf.Normalize(tfIdf))
+            {
+                string dist = "計算結果_正規化/" + n.Key;
+                if (!Directory.Exists(Path.GetDirectoryName(dist)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(dist));
+                }
+
+                using (StreamWriter writer = new StreamWriter(dist))
+                {
+                    writer.Write(JsonConvert.SerializeObject(n.Value, Formatting.Indented));
+                }
+            }
+
             return;
         }
     }

@@ -23,10 +23,10 @@ namespace TweetToNewsCS
 
             List<TwitterStatus> data = Logic.GetData(option).ToList();
 
-            Console.WriteLine("ツイートの数 : {0}", data.Count);
+            Console.WriteLine("ツイートの数 : {0}", data.Count());
 
             List< IEnumerable<MeCabResult> > parsed = MeCab.Parse(data).Filtering(option).ToList();
-            Console.WriteLine("単語の数 : {0}", parsed.Count);
+            Console.WriteLine("単語の数 : {0}", parsed.Sum(e => e.Count()));
 
             List<MeCabResultAggregate> aggregate = MeCab.AggregateAll(parsed).OrderByDescending(a => a.Num).ToList();
 
@@ -35,11 +35,13 @@ namespace TweetToNewsCS
                 Directory.CreateDirectory("単語/");
             }
 
-            string outPath = "単語/" + (option.output) + "_" + DateTime.Now.ToString("yyMMdd_HHmm") + ".json";
+            string outPath = "単語/" + (option.output) + "_" + DateTime.Now.ToString("yyMMdd_HHmmss") + ".json";
             using (StreamWriter writer = new StreamWriter(outPath))
             {
                 writer.WriteLine(JsonConvert.SerializeObject(aggregate, Formatting.Indented));
             }
+
+            return;
         }
     }
 }

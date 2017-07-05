@@ -12,7 +12,7 @@ using TweetSharp;
 
 namespace TweetToNewsCS.Model.Infrastructure
 {
-    static class MeCab
+    public static class MeCab
     {
         private static MeCabTagger tagger;
 
@@ -85,9 +85,9 @@ namespace TweetToNewsCS.Model.Infrastructure
         private static Dictionary<string, MeCabResultAggregate> AddResult(this Dictionary<string, MeCabResultAggregate> result, MeCabResult add)
         {
             MeCabResultAggregate buf = new MeCabResultAggregate();
-            buf.Result       = add;
-            buf.Num          = result.ContainsKey(add.原形) ? result[add.原形].Num + 1 : 1;
-            result[add.原形] = buf;
+            buf.Result         = add;
+            buf.Num            = result.ContainsKey(add.表層形) ? result[add.表層形].Num + 1 : 1;
+            result[add.表層形] = buf;
 
             return result;
         }

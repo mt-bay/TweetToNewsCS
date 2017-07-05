@@ -25,11 +25,15 @@ namespace TweetToNewsCS.Model.Application
                 returns = returns.Concat((List<TwitterStatus>)JsonConvert.DeserializeObject(option.raw)).ToList();
             }
 
-            if (option.file != string.Empty)
+            if (option.dir != string.Empty)
             {
-                using (StreamReader reader = new StreamReader(option.file))
+                string[] files = Directory.GetFiles(option.dir);
+                foreach(string f in files)
                 {
-                    returns = returns.Concat((IEnumerable<TwitterStatus>)JsonConvert.DeserializeObject(reader.ReadToEnd())).ToList();
+                    using (StreamReader reader = new StreamReader(f))
+                    {
+                        returns = returns.Concat((IEnumerable<TwitterStatus>)JsonConvert.DeserializeObject(reader.ReadToEnd())).ToList();
+                    }
                 }
             }
 

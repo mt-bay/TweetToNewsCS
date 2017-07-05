@@ -7,47 +7,32 @@ using System.Reflection;
 
 using TweetToNewsCS.Model.Domain;
 using Newtonsoft.Json;
+using CommandLine;
 
 namespace TweetToNewsCS.Model.Infrastructure
 {
-    class OptionAnalysis
+    public static class OptionAnalysis
     {
-
-        public static Options Analysis(string[] args)
+        public static T Parse<T>(string[] args)
+            where T : IOption
         {
-            if(args == null)
+            T returns = default(T);
+            int code = Parser.Default.ParseArguments<T>(args)
+                .MapResult(
+                    (T opt) =>
+                    {
+                        returns = opt;
+                        return 0;
+                    },
+                    err => 1
+                );
+            switch (code)
             {
-                return new Options();
+                case 0:
+                    return returns;
+                default:
+                    throw new ArgumentException();
             }
-
-            Options returns = new Options();
-            Type returnsType = returns.GetType();
-
-            PropertyInfo[] property = returnsType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-
-            List<string> optionsList = property.Select(hoge => hoge.Name).ToList();
-            string[] bufArgs = args.Length % 2 == 0 ? args.ToArray() : args.Concat(new string[] { "" }).ToArray();
-
-            Dictionary<string, string> input = new Dictionary<string, string>();
-
-            for (int i = 0; i < bufArgs.Length; i += 2)
-            {
-                input[bufArgs[i].Substring(1).ToLower()] = bufArgs[i + 1];
-            }
-
-            foreach(PropertyInfo p in returnsType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
-            {
-                try
-                {
-                    p.SetValue(returns, input[p.Name] ?? string.Empty);
-                }
-                catch(KeyNotFoundException e)
-                {
-                    p.SetValue(returns, string.Empty);
-                }
-            }
-
-            return returns;
         }
     }
 }

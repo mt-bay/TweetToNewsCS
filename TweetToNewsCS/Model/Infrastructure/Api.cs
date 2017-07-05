@@ -11,7 +11,7 @@ namespace TweetToNewsCS.Model.Infrastructure
     /// <summary>
     /// WebAPIを叩くクラス
     /// </summary>
-    static class Api
+    public static class Api
     {
         /// <summary>
         /// GET

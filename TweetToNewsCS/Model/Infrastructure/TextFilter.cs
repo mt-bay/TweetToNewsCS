@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TweetToNewsCS.Model.Infrastructure
 {
-    class TextFilter
+    public class TextFilter
     {
         public static string Filtering(string raw)
         {
@@ -25,8 +25,8 @@ namespace TweetToNewsCS.Model.Infrastructure
         /// <summary>
         /// リプライの宛先表示を消す
         /// </summary>
-        /// <param name="raw"></param>
-        /// <returns></returns>
+        /// <param name="raw">削除前の文字列</param>
+        /// <returns>削除後の文字列</returns>
         private static string RemoveReplyTo(string raw)
         {
             return Regex.Replace(raw, @"@[\w:]+\s*", "");
@@ -36,7 +36,8 @@ namespace TweetToNewsCS.Model.Infrastructure
         /// <summary>
         /// RTを表す記号の削除
         /// </summary>
-        /// <returns></returns>
+        /// <param name="raw">削除前の文字列</param>
+        /// <returns>削除後の文字列</returns>
         private static string RemoveRetweetSign(string raw)
         {
             return Regex.Replace(raw, @"^RT(\s)*", "");
@@ -46,14 +47,18 @@ namespace TweetToNewsCS.Model.Infrastructure
         /// <summary>
         /// URLの除去
         /// </summary>
-        /// <param name="raw"></param>
-        /// <returns></returns>
+        /// <param name="raw">削除前の文字列</param>
+        /// <returns>削除後の文字列</returns>
         private static string RemoveUrl(string raw)
         {
             return Regex.Replace(raw, @"http(s)?://([\w-]+\.)+[\w-]+(/[\w-./_%&=]*)?", "");
         }
 
-
+        /// <summary>
+        /// 改行文字の削除
+        /// </summary>
+        /// <param name="raw">削除前の文字列</param>
+        /// <returns>削除後の文字列</returns>
         private static string RemoveNewLine(string raw)
         {
             return Regex.Replace(raw, @"[\r\n]", "");

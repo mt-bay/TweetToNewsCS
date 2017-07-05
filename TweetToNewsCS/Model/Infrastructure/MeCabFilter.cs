@@ -9,7 +9,7 @@ using TweetToNewsCS.Model.Domain;
 
 namespace TweetToNewsCS.Model.Infrastructure
 {
-    class MeCabFilter
+    public class MeCabFilter
     {
         private List<MeCabResult> filter;
         private List<MeCabResult> acceptFilter;

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace TweetToNewsCS.Model.Domain
 {
-    struct MeCabResult
+    /// <summary>
+    /// MeCabの解析結果保存用構造体
+    /// </summary>
+    public struct MeCabResult
     {
         /// <summary> 表層形 </summary>
         public string 表層形 { get; set; }
