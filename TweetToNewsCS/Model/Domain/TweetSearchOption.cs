@@ -64,5 +64,8 @@ namespace TweetToNewsCS.Model.Domain
 
         [Option('c', "count", Default = null)]
         public int? Count { get; set; }
+
+        [Option('o', "output", Default = "out.json")]
+        public string OutputFile { get; set; }
     }
 }

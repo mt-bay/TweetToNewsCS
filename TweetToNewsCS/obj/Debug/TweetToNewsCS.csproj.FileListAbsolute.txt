@@ -43,3 +43,8 @@ C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\sv\ZedGraph.resources.dll
 C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\tr\ZedGraph.resources.dll
 C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\zh-cn\ZedGraph.resources.dll
 C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\zh-tw\ZedGraph.resources.dll
+C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\CommandLine.dll
+C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\FSharp.Core.dll
+C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\CommandLine.xml
+C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\FSharp.Core.xml
+C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\ja\FSharp.Core.resources.dll

@@ -98,6 +98,7 @@
     <Compile Include="Model\Domain\MeCabResultAggregate.cs" />
     <Compile Include="Model\Domain\Options.cs" />
     <Compile Include="Model\Domain\TweetSearchOption.cs" />
+    <Compile Include="Model\Domain\TweetsToWordsOption.cs" />
     <Compile Include="Model\Infrastructure\Api.cs" />
     <Compile Include="Model\Infrastructure\MeCab.cs" />
     <Compile Include="Model\Infrastructure\MeCabFilter.cs" />

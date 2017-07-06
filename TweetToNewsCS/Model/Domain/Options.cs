@@ -12,9 +12,7 @@ namespace TweetToNewsCS.Model.Domain
         public string dir { get; set; }
         public string file { get; set; }
         public string raw { get; set; }
-        public string filterfile { get; set; }
-        public string filterraw { get; set; }
-        public string acceptfile { get; set; }
+
         public string output { get; set; }
     }
 }
