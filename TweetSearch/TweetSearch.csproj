@@ -34,27 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Accord, Version=3.5.4.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Accord.3.5.4-alpha\lib\net45\Accord.dll</HintPath>
-    </Reference>
-    <Reference Include="Accord.Controls, Version=3.5.4.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Accord.Controls.3.5.4-alpha\lib\net45\Accord.Controls.dll</HintPath>
-    </Reference>
-    <Reference Include="Accord.IO, Version=3.5.4.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Accord.IO.3.5.4-alpha\lib\net45\Accord.IO.dll</HintPath>
-    </Reference>
-    <Reference Include="Accord.MachineLearning, Version=3.5.4.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Accord.MachineLearning.3.5.4-alpha\lib\net45\Accord.MachineLearning.dll</HintPath>
-    </Reference>
-    <Reference Include="Accord.Math, Version=3.5.4.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Accord.Math.3.5.4-alpha\lib\net45\Accord.Math.dll</HintPath>
-    </Reference>
-    <Reference Include="Accord.Math.Core, Version=3.5.4.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Accord.Math.3.5.4-alpha\lib\net45\Accord.Math.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Accord.Statistics, Version=3.5.4.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Accord.Statistics.3.5.4-alpha\lib\net45\Accord.Statistics.dll</HintPath>
-    </Reference>
     <Reference Include="CommandLine, Version=2.0.275.0, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
       <HintPath>..\packages\CommandLineParser.2.1.1-beta\lib\net45\CommandLine.dll</HintPath>
     </Reference>
@@ -82,9 +61,6 @@
     <Reference Include="TweetSharp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
       <HintPath>..\packages\TweetSharp-Unofficial.2.3.1.2\lib\4.0\TweetSharp.dll</HintPath>
     </Reference>
-    <Reference Include="ZedGraph, Version=5.1.7.430, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
-      <HintPath>..\packages\ZedGraph.5.1.7\lib\net35-Client\ZedGraph.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Application\Logic.cs" />
@@ -104,7 +80,6 @@
     <Content Include="..\TweetToNewsCS\Model\**\*.*" Exclude="..\TweetToNewsCS\Model\Application\*.*">
       <Link>Model\%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Content>
-    <Content Include="License-LGPL.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TweetToNewsCS\TweetToNewsCS.csproj">
@@ -119,7 +94,5 @@
       <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\NMeCab.0.06.4\build\NMeCab.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NMeCab.0.06.4\build\NMeCab.targets'))" />
-    <Error Condition="!Exists('..\packages\Accord.3.5.4-alpha\build\Accord.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Accord.3.5.4-alpha\build\Accord.targets'))" />
   </Target>
-  <Import Project="..\packages\Accord.3.5.4-alpha\build\Accord.targets" Condition="Exists('..\packages\Accord.3.5.4-alpha\build\Accord.targets')" />
 </Project>

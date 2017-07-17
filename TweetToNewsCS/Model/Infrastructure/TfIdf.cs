@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TweetToNewsCS.Model.Domain;
 
-namespace TfIdfCalc.Model.Infrastructure
+namespace TweetToNewsCS.Model.Infrastructure
 {
     public class TfIdf
     {

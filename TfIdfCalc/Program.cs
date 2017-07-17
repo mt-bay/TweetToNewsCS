@@ -3,9 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TfIdfCalc.Model.Infrastructure;
+using TweetToNewsCS.Model.Infrastructure;
 using TweetToNewsCS.Model.Domain;
 
 
@@ -21,7 +19,7 @@ namespace TfIdfCalc
             {
                 Console.Error.WriteLine("ディレクトリを指定してください");
                 return;
-            }
+            } 
 
             foreach(string a in args)
             {
@@ -35,9 +33,9 @@ namespace TfIdfCalc
                 }
             }
 
-            Console.WriteLine("対象のファイル数 : {0}", aggregate.Count);
-
             Dictionary<string, Dictionary<string, double>> tfIdf = TfIdf.GetAllTfIdf(aggregate);
+
+            Console.WriteLine("対象のファイル数 : {0}", aggregate.Count);
 
             foreach(KeyValuePair<string, Dictionary<string, double> > t in tfIdf)
             {

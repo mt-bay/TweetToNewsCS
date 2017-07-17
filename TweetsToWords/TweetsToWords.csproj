@@ -40,6 +40,9 @@
     <Reference Include="Hammock, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
       <HintPath>..\packages\TweetSharp-Unofficial.2.3.1.2\lib\4.0\Hammock.dll</HintPath>
     </Reference>
+    <Reference Include="Hammock.ClientProfile, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hammock.ClientProfile.1.0.0\lib\Hammock.ClientProfile.dll</HintPath>
+    </Reference>
     <Reference Include="LibNMeCab, Version=0.0.6.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NMeCab.0.06.4\lib\LibNMeCab.dll</HintPath>
     </Reference>

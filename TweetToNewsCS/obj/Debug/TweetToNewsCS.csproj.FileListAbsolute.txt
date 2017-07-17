@@ -48,3 +48,17 @@ C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\FSharp.Core.dll
 C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\CommandLine.xml
 C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\FSharp.Core.xml
 C:\src\TweetsToNewsCS\TweetToNewsCS\bin\Debug\ja\FSharp.Core.resources.dll
+D:\Users\mt-bay\Documents\Repository\TweetToNewsCS\TweetToNewsCS\obj\Debug\TweetToNewsCS.csprojResolveAssemblyReference.cache
+D:\Users\mt-bay\Documents\Repository\TweetToNewsCS\TweetToNewsCS\obj\Debug\TweetToNewsCS.exe
+D:\Users\mt-bay\Documents\Repository\TweetToNewsCS\TweetToNewsCS\obj\Debug\TweetToNewsCS.pdb
+D:\Users\mt-bay\Documents\Repository\TweetToNewsCS\TweetToNewsCS\bin\Debug\TweetToNewsCS.exe.config
+D:\Users\mt-bay\Documents\Repository\TweetToNewsCS\TweetToNewsCS\bin\Debug\TweetToNewsCS.exe
+D:\Users\mt-bay\Documents\Repository\TweetToNewsCS\TweetToNewsCS\bin\Debug\TweetToNewsCS.pdb
+D:\Users\mt-bay\Documents\Repository\TweetToNewsCS\TweetToNewsCS\bin\Debug\CommandLine.dll
+D:\Users\mt-bay\Documents\Repository\TweetToNewsCS\TweetToNewsCS\bin\Debug\Hammock.dll
+D:\Users\mt-bay\Documents\Repository\TweetToNewsCS\TweetToNewsCS\bin\Debug\LibNMeCab.dll
+D:\Users\mt-bay\Documents\Repository\TweetToNewsCS\TweetToNewsCS\bin\Debug\TweetSharp.dll
+D:\Users\mt-bay\Documents\Repository\TweetToNewsCS\TweetToNewsCS\bin\Debug\CommandLine.xml
+D:\Users\mt-bay\Documents\Repository\TweetToNewsCS\TweetToNewsCS\bin\Debug\Hammock.pdb
+D:\Users\mt-bay\Documents\Repository\TweetToNewsCS\TweetToNewsCS\bin\Debug\Newtonsoft.Json.xml
+D:\Users\mt-bay\Documents\Repository\TweetToNewsCS\TweetToNewsCS\bin\Debug\TweetSharp.pdb
